@@ -14,24 +14,15 @@ from datetime import datetime
 sns.set_theme(style='whitegrid', palette='tab20')
 
 # ── Data ──────────────────────────────────────────────────────────────────────
-#DATA_DIR = r'C:\Users\andre\Desktop\Sandbox\Project for Data Modelling'
-
-# Create a timestamped output folder for this run
-#run_id    = datetime.now().strftime('%Y%m%d_%H%M%S')
-#OUT_DIR   = Path(DATA_DIR) / 'plots' / run_id
-#OUT_DIR.mkdir(parents=True, exist_ok=True)
-dir = Path('C:\\Users\\andre\\Desktop\\Sandbox\\Project for Data Modelling')
+dir = Path(__file__).parent
 
 def save(fig, name):
     fig.savefig(dir / name, dpi=150, bbox_inches='tight')
     plt.show()
-#A3_data       = pd.read_csv(f'{DATA_DIR}/A3 set.txt',    sep=r'\s+', header=None)
-#A3_ga_cb_data = pd.read_table(f'{DATA_DIR}/a3-ga-cb.txt')
-#A3_ga_pa_data = pd.read_table(f'{DATA_DIR}/a3-ga.pa')
 
-A3_data = pd.read_csv('C:\\Users\\andre\\Desktop\\Sandbox\\Project for Data Modelling\\A3 set.txt', sep = r'\s+', header=None)
-A3_ga_cb_data = pd.read_table('C:\\Users\\andre\\Desktop\\Sandbox\\Project for Data Modelling\\a3-ga-cb.txt')
-A3_ga_pa_data = pd.read_table('C:\\Users\\andre\\Desktop\\Sandbox\\Project for Data Modelling\\a3-ga.pa')
+A3_data = pd.read_csv(dir / 'A3 set.txt', sep=r'\s+', header=None)
+A3_ga_cb_data = pd.read_table(dir / 'a3-ga-cb.txt')
+A3_ga_pa_data = pd.read_table(dir / 'a3-ga.pa')
 
 seed = 42
 np.random.seed(seed)
@@ -221,13 +212,13 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
 sns.lineplot(data=sweep_df, x='k', y='Inertia', marker='o', ax=ax1)
 ax1.set_title('Elbow Curve')
 ax1.set_xlabel('Number of clusters (k)')
-ax1.set_xticks(np.arange(k_range, step = 2))
+ax1.set_xticks(k_range[::2])
 
 sns.lineplot(data=sweep_df, x='k', y='Silhouette Score', marker='o',
              color='darkorange', ax=ax2)
 ax2.set_title('Silhouette Score vs k')
 ax2.set_xlabel('Number of clusters (k)')
-ax2.set_xticks(np.arange(k_range, step = 2))
+ax2.set_xticks(k_range[::2])
 
 plt.tight_layout()
 save(fig, '07_elbow_silhouette_sweep.png')
@@ -419,4 +410,4 @@ for bar, val in zip(ax2.patches, agg_metrics_df['TD²']):
 plt.tight_layout()
 save(fig, '14_agg_linkage_metrics.png')
 
-print(f"\nAll plots saved to: {Damien_directory}")
+print(f"\nAll plots saved to: {dir}")
