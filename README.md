@@ -2,6 +2,17 @@
 
 Unsupervised clustering analysis (KMeans, Gaussian Mixture Models, Agglomerative/hierarchical clustering) applied to the A3 dataset, comparing cluster structure across methods with silhouette scores, TD² (total squared distance), adjusted Rand index stability, and generating a presentation deck of results.
 
+📖 **[Full 4-way method comparison and cluster-validity methodology → project Wiki](https://github.com/andrm101/project-for-data-modelling/wiki)**
+
+## Results at a glance
+
+<p align="center">
+  <img src="06_silhouette_comparison.png" width="48%" alt="Silhouette score comparison across methods" />
+  <img src="10_kmeans_stability_ari.png" width="48%" alt="K-Means stability under repeated random-state runs" />
+</p>
+
+K-Means++ and GMM/EM are statistically comparable (silhouette 0.594 vs. 0.590) and both land within ~6-9% of the external GA-VQ reference solution's compactness — but random-init K-Means shows 5x the run-to-run instability of K-Means++. Initialization matters more than algorithm choice on this dataset; see the wiki for the full comparison table.
+
 ## Architecture
 
 ```mermaid
