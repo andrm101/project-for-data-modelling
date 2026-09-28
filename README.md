@@ -1,4 +1,6 @@
-# A3 Clustering Analysis
+<p align="center">
+  <img src="assets/brand-banner.svg" alt="A3 Clustering Analysis" width="100%">
+</p>
 
 Unsupervised clustering analysis (KMeans, Gaussian Mixture Models, Agglomerative/hierarchical clustering) applied to the A3 dataset, comparing cluster structure across methods with silhouette scores, TD² (total squared distance), adjusted Rand index stability, and generating a presentation deck of results.
 
